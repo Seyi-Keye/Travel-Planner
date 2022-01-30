@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function GoogleMap() {
 
   let map;
   let service;
   let infowindow;
+  const [places, setPlaces] = useState([]);
 
   function initMap() {
     const sydney = new window.google.maps.LatLng(-33.867, 151.195);
@@ -16,12 +17,14 @@ function GoogleMap() {
     });
 
     const request = {
-      query: "Museum of Contemporary Art Australia",
+      query: "things to do waterloo",
       fields: ["name", "geometry"],
     };
 
     service = new window.google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
+    service.textSearch(request, (results, status) => {
+      console.log('result', results);
+      setPlaces(results);
       if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
         for (let i = 0; i < results.length; i++) {
           createMarker(results[i]);
@@ -53,7 +56,10 @@ function GoogleMap() {
   }, [])
 
   return(
-    <div id='map'></div>
+    <>
+      {places.map(place =><p>{place.name}</p>)}
+      <div id='map'></div>
+    </>
   );
 }
 
