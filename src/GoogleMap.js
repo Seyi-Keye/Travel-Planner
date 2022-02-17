@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function GoogleMap() {
+function GoogleMap({location}) {
 
   let map;
   let service;
@@ -17,7 +17,7 @@ function GoogleMap() {
     });
 
     const request = {
-      query: "things to do waterloo",
+      query: location ? `things to do + ${location}` : "things to do waterloo",
       fields: ["name", "geometry"],
     };
 
