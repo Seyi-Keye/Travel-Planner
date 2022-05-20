@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-function GoogleMap({location}) {
+function GoogleMap({ location }) {
+  // const [query, setQuery] = useState('things to do');
+
+  // location && setQuery(query + `${location}`);
 
   let map;
   let service;
@@ -8,6 +11,8 @@ function GoogleMap({location}) {
   const [places, setPlaces] = useState([]);
 
   function initMap() {
+    // console.log('new window.google.maps', new window());
+
     const sydney = new window.google.maps.LatLng(-33.867, 151.195);
 
     infowindow = new window.google.maps.InfoWindow();
@@ -17,13 +22,17 @@ function GoogleMap({location}) {
     });
 
     const request = {
-      query: location ? `things to do + ${location}` : "things to do waterloo",
+      // query: location ? `things to do + ${location}` : "things to do waterloo",
+      query: "things to do atlanta",
+
       fields: ["name", "geometry"],
     };
 
+    // console.log('location', location, location ? `things to do + ${location}` : "things to do waterloo");
+
     service = new window.google.maps.places.PlacesService(map);
     service.textSearch(request, (results, status) => {
-      console.log('result', results);
+      console.log('result ==', results);
       setPlaces(results);
       if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
         for (let i = 0; i < results.length; i++) {
@@ -52,12 +61,13 @@ function GoogleMap({location}) {
   }
 
   useEffect(() => {
+    console.log('useEffect');
     initMap();
   }, [])
 
   return(
     <>
-      {places.map(place =><p>{place.name}</p>)}
+      {/* {places.map(place =><p>{place.name}</p>)} */}
       <div id='map'></div>
     </>
   );

@@ -8,21 +8,22 @@ function App() {
 
   const handleLocationInput = (e) => {
     e.preventDefault();
+    console.log(value);
   };
 
   const handleInputChange = e => {
     e.preventDefault();
     setValue(e.target.value)
   };
-  
+
   return (
     <div className="App">
-      <form onSubmit={handleLocationInput}>
+      {/* <form onSubmit={handleLocationInput}>
       <h1>Enter your desired location</h1>
         <input type='text' id='locationInput' placeholder='Type here' value={value} onChange={handleInputChange}/>
-        <input type='submit' value='Submit' />
-      </form>
-      <GoogleMap location={value}/>
+        <input type='submit' value='Submit' /> */}
+      {/* </form> */}
+      <GoogleMap/>
     </div>
   );
 }
