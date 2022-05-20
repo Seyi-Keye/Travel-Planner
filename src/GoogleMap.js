@@ -11,8 +11,6 @@ function GoogleMap({ location }) {
   const [places, setPlaces] = useState([]);
 
   function initMap() {
-    // console.log('new window.google.maps', new window());
-
     const sydney = new window.google.maps.LatLng(-33.867, 151.195);
 
     infowindow = new window.google.maps.InfoWindow();
@@ -22,13 +20,10 @@ function GoogleMap({ location }) {
     });
 
     const request = {
-      // query: location ? `things to do + ${location}` : "things to do waterloo",
-      query: "things to do atlanta",
+      query: location ? `things to do + ${location}` : "things to do waterloo",
 
       fields: ["name", "geometry"],
     };
-
-    // console.log('location', location, location ? `things to do + ${location}` : "things to do waterloo");
 
     service = new window.google.maps.places.PlacesService(map);
     service.textSearch(request, (results, status) => {
@@ -61,13 +56,12 @@ function GoogleMap({ location }) {
   }
 
   useEffect(() => {
-    console.log('useEffect');
     initMap();
-  }, [])
+  }, [location])
 
-  return(
+  return (
     <>
-      {/* {places.map(place =><p>{place.name}</p>)} */}
+      {places.map(place =><p>{place.name}</p>)}
       <div id='map'></div>
     </>
   );
