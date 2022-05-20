@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from 'react';
+import GoogleMap from './GoogleMap';
+import './style.css';
 
 function App() {
+  const [value, setValue] = useState('');
+
+  const handleLocationInput = (e) => {
+    e.preventDefault();
+    console.log(value);
+  };
+
+  const handleInputChange = e => {
+    e.preventDefault();
+    setValue(e.target.value)
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <form onSubmit={handleLocationInput}>
+      <h1>Enter your desired location</h1>
+        <input type='text' id='locationInput' placeholder='Type here' value={value} onChange={handleInputChange}/>
+        <input type='submit' value='Submit' /> */}
+      {/* </form> */}
+      <GoogleMap/>
     </div>
   );
 }
